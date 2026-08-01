@@ -26,8 +26,9 @@ def run():
     """
     Run the crew.
     """
+    topic = sys.argv[1] if len(sys.argv) > 1 else "Find the best places to live in the USA"
     inputs = {
-        'topic': 'Find the best places to live in the USA',
+        'topic': topic,
         'current_year': str(datetime.now().year)
     }
 

@@ -1,54 +1,69 @@
-# Researcher Crew
+# crewai-researcher
 
-Welcome to the Researcher Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+A simple [CrewAI](https://crewai.com) project with **one agent** that researches any topic you give it.
 
-## Installation
+Pass in a topic, and the agent gathers relevant, up-to-date information and writes the results to `report.md`.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+## What it does
 
-First, if you haven't already, install uv:
+- Takes a **topic** as input (anything you want researched)
+- Uses a single **Senior Data Researcher** agent powered by OpenAI
+- Produces a markdown research report in the project root
 
-```bash
-pip install uv
-```
+## Setup
 
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/researcher/config/agents.yaml` to define your agents
-- Modify `src/researcher/config/tasks.yaml` to define your tasks
-- Modify `src/researcher/crew.py` to add your own logic, tools and specific args
-- Modify `src/researcher/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+Requires Python 3.10–3.13 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-$ crewai run
+git clone https://github.com/CodeGeeths/crewai-researcher.git
+cd crewai-researcher
+uv sync
 ```
 
-This command initializes the researcher Crew, assembling the agents and assigning them tasks as defined in your configuration.
+Create a `.env` file with your OpenAI API key:
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+```bash
+OPENAI_API_KEY=sk-your-key-here
+```
 
-## Understanding Your Crew
+## Usage
 
-The researcher Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+Run with the default topic:
 
-## Support
+```bash
+uv run researcher
+```
 
-For support, questions, or feedback regarding the Researcher Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+Or pass your own topic:
 
-Let's create wonders together with the power and simplicity of crewAI.
+```bash
+uv run researcher "Best cities for remote workers in 2026"
+```
+
+You can also use the CrewAI CLI:
+
+```bash
+crewai run
+```
+
+The output is saved to `report.md`.
+
+## Project structure
+
+```
+crewai-researcher/
+├── src/researcher/
+│   ├── config/
+│   │   ├── agents.yaml    # Agent role, goal, and LLM
+│   │   └── tasks.yaml     # Research task definition
+│   ├── crew.py            # Crew setup
+│   └── main.py            # Entry point and inputs
+├── pyproject.toml
+└── .env                   # Your API keys (not committed)
+```
+
+## Customizing
+
+- **Change the topic** — pass it on the command line, or edit the default in `src/researcher/main.py`
+- **Change the agent** — edit `src/researcher/config/agents.yaml`
+- **Change the task** — edit `src/researcher/config/tasks.yaml`

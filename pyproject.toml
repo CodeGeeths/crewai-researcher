@@ -1,8 +1,8 @@
 [project]
-name = "researcher"
+name = "crewai-researcher"
 version = "0.1.0"
-description = "researcher using crewAI"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "Simple single-agent CrewAI research crew — give it any topic and get a report"
+authors = [{ name = "CodeGeeths", email = "you@example.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
     "crewai[tools]==1.14.4"
